@@ -1,17 +1,12 @@
 package com.alisson.projeto.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import jakarta.persistence.*;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
 
 @Entity
 public class Produto implements Serializable {
@@ -23,6 +18,7 @@ public class Produto implements Serializable {
     private String nome;
     private double preco;
 
+    @JsonBackReference
     @ManyToMany
     @JoinTable(
         name = "produto_categoria",
@@ -80,12 +76,8 @@ public class Produto implements Serializable {
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
         Produto other = (Produto) obj;
         return Objects.equals(id, other.id);
     }
