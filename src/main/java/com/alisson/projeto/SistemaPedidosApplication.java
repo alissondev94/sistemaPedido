@@ -9,10 +9,15 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.alisson.projeto.domain.Categoria;
 import com.alisson.projeto.domain.Cidade;
+import com.alisson.projeto.domain.Cliente;
+import com.alisson.projeto.domain.Endereco;
 import com.alisson.projeto.domain.Estado;
 import com.alisson.projeto.domain.Produto;
+import com.alisson.projeto.domain.enums.TipoCliente;
 import com.alisson.projeto.repositories.CategoriaRepository;
 import com.alisson.projeto.repositories.CidadeRepository;
+import com.alisson.projeto.repositories.ClienteRepository;
+import com.alisson.projeto.repositories.EnderecoRepository;
 import com.alisson.projeto.repositories.EstadoRepository;
 import com.alisson.projeto.repositories.ProdutoRepository;
 
@@ -27,6 +32,10 @@ public class SistemaPedidosApplication implements CommandLineRunner {
     private EstadoRepository estadoRepository;
     @Autowired
     private CidadeRepository cidadeRepository;
+    @Autowired
+    private ClienteRepository clienteRepository;
+    @Autowired
+    private EnderecoRepository enderecoRepository;
 
     public static void main(String[] args) {
         SpringApplication.run(SistemaPedidosApplication.class, args);
@@ -60,5 +69,16 @@ public class SistemaPedidosApplication implements CommandLineRunner {
 
         estadoRepository.saveAll(Arrays.asList(est1, est2));
         cidadeRepository.saveAll(Arrays.asList(c1, c2, c3));
+
+        Cliente cli1 = new Cliente(null, "Alisson Paixão", "Alissonpx@gmail.com", "012.345.678-90", TipoCliente.PESSOAFISICA);
+        cli1.getTelefones().addAll(Arrays.asList("71983852562", "71997052265"));
+
+        Endereco e1 = new Endereco(null, "Jardim 2 de julho", "69", "casa", "Pituba", "41347200", cli1, c1);
+        Endereco e2 = new Endereco(null, "copacabana", "100", "apt304", "caju", "4526873", cli1, c2);
+
+        cli1.getEndereco().addAll(Arrays.asList(e1, e2));
+
+        clienteRepository.save(cli1);
+        enderecoRepository.saveAll(cli1.getEndereco());
     }
 }
