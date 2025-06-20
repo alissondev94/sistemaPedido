@@ -8,8 +8,6 @@ import org.springframework.stereotype.Repository;
 import com.alisson.projeto.domain.Endereco;
 
 @Repository
-public interface EnderecoRepository extends JpaRepository <Endereco, Integer>{
-
-	Optional<Endereco> findById(Integer id);
-
+public interface EnderecoRepository extends JpaRepository <Endereco, Integer> {
+    Optional<Endereco> findById(Integer id);
 }

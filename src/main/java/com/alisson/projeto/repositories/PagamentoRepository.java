@@ -5,9 +5,9 @@ import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.alisson.projeto.domain.Cliente;
+import com.alisson.projeto.domain.Pagamento;
 
 @Repository
-public interface ClienteRepository extends JpaRepository <Cliente, Integer> {
-    Optional<Cliente> findById(Integer id);
+public interface PagamentoRepository extends JpaRepository <Pagamento, Integer> {
+    Optional<Pagamento> findById(Integer id);
 }

@@ -9,7 +9,5 @@ import com.alisson.projeto.domain.Produto;
 
 @Repository
 public interface ProdutoRepository extends JpaRepository<Produto, Integer> {
-	
-	Optional<Produto> findById(Integer id);
-
+    Optional<Produto> findById(Integer id);
 }
